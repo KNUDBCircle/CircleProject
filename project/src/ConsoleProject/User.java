@@ -5,14 +5,14 @@ public class User{
 	   private String name;
 	   private String phoneNum;
 	   
-	   public String getId() {
+	   public String getUserId() {
 	      return id;
 	   }
 	   
-	   public String getName() {
+	   public String getUserName() {
 	      return name;
 	   }
-	   public String getPhoneNum() {
+	   public String getUserPhoneNum() {
 		      return phoneNum;
 		   }
 	   public User(String id, String name, String phoneNum) {
