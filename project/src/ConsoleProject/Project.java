@@ -1,7 +1,7 @@
 package chanwoo;
 import java.sql.*;
 
-public class Project{
+public class Main{
 	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	public static final String USER_COMPANY ="COMPANY";
 	public static final String USER_PASSWD ="COMPANY";
