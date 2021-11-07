@@ -4,7 +4,7 @@ public class DBHelper {
 	   private static DBHelper instance = new DBHelper();
 	   
 	   public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-	   public static final String USER_UNIVERSITY ="circle";
+	   public static final String USER_ID ="circle";
 	   public static final String USER_PASSWD ="circle";
 	   
 	   private Connection conn = null; // Connection object
@@ -21,7 +21,7 @@ public class DBHelper {
 	      }
 	      
 	      try {
-	         conn = DriverManager.getConnection(URL, USER_UNIVERSITY, USER_PASSWD);
+	         conn = DriverManager.getConnection(URL, USER_ID, USER_PASSWD);
 	         conn.setAutoCommit(false);
 	         stmt = conn.createStatement();
 	         System.out.println("connected");
@@ -37,7 +37,6 @@ public class DBHelper {
 	   
 	   public int updateSql(String sql) {
 	      try {
-	         //System.out.println(sql);
 	         int res = stmt.executeUpdate(sql);
 	         conn.commit();
 	         return res;
