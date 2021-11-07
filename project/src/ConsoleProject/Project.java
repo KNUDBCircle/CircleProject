@@ -1,7 +1,8 @@
-package chanwoo;
+package ConsoleProject;
+import chanwoo.*;
 import java.sql.*;
 
-public class Main{
+public class Project{
 	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	public static final String USER_COMPANY ="COMPANY";
 	public static final String USER_PASSWD ="COMPANY";
@@ -30,12 +31,21 @@ public class Main{
 	       //로그인 정보 저장
 	       
 	       User user = new User("hso0473", "배찬우");
-	       
-	       while()
-	       
-
-	      
-	      
+	       int choice = 1;
+	       while (choice != 0) {
+	    	   //로그인
+	    	   //회원가입
+	    	   
+	    	   System.out.println("1.Create/submit");
+	    	   System.out.println("2.Enter circle");
+	    	   Circle circle = new Circle(conn, stmt, user);
+	    	   circle.circlePage(conn, stmt, user);
+	    	   
+	    	   
+	    	   
+	    	   
+	    	   
+	       }
 	      
 	      
 	      try {
