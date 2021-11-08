@@ -4,8 +4,8 @@ public class DBHelper {
 	   private static DBHelper instance = new DBHelper();
 	   
 	   public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-	   public static final String USER_ID ="circle";
-	   public static final String USER_PASSWD ="circle";
+	   public static final String USER_ID ="CIRCLE";
+	   public static final String USER_PASSWD ="CIRCLE";
 	   
 	   private Connection conn = null; // Connection object
 	   private Statement stmt = null;   // Statement object
@@ -16,6 +16,7 @@ public class DBHelper {
 	         System.out.println("Success");
 	      } catch (ClassNotFoundException e1) {
 	         // TODO Auto-generated catch block
+	    	 System.out.println("머가문제야");
 	         e1.printStackTrace();
 	         System.exit(1);
 	      }
@@ -53,5 +54,17 @@ public class DBHelper {
 	         System.out.println("error: " + e.getMessage());
 	         return null;
 	      }
+	   }
+	   public void closeDBHelper() {
+		      try {
+		          // Close the Statement object.
+		          stmt.close(); 
+		          // Close the Connection object.
+		          conn.close();
+		       } catch (SQLException e) {
+		          // TODO Auto-generated catch block
+		          e.printStackTrace();
+		       }
+		   
 	   }
 	}
