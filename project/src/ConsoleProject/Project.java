@@ -3,27 +3,19 @@ package ConsoleProject;
 import chanwoo.*;
 import java.sql.*;
 
-public class Project {
-	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-	public static final String USER_COMPANY = "COMPANY";
-	public static final String USER_PASSWD = "COMPANY";
+import SpecificCircle.*;
 
+public class Project {
+	
 	public static void main(String[] args) {
 
-		DBHelper db = DBHelper.getInstance();
 
-		// ·Î±×ÀÎ Á¤º¸ ÀúÀå
-
-		User user = new User("ijcavr605", "½Ã¿Â", "01051971913");
-		int choice = 1;
-
-		// ·Î±×ÀÎ
-		// È¸¿ø°¡ÀÔ
-
-
-		Circle circle = new Circle(db, user);
-		circle.circlePage();
-		db.closeDBHelper();
+		User user1= new User("gsqogs074","í•˜ì§„","");
+	    enterCircle c1=new enterCircle("íŒŒë„íƒ€ê¸°",user1);
+	     
+	    c1.printMenu();
+	      
+	    System.out.println("ë‚˜ì˜´ !");
 
 	}
 

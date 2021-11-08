@@ -3,9 +3,17 @@ import java.sql.*;
 public class DBHelper {
 	   private static DBHelper instance = new DBHelper();
 	   
-	   public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-	   public static final String USER_ID ="CIRCLE";
-	   public static final String USER_PASSWD ="CIRCLE";
+//	   public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+//	   public static final String USER_ID ="CIRCLE";
+//	   public static final String USER_PASSWD ="CIRCLE";
+	   
+	   
+	   //ê¹€ë¯¸ì£¼ 
+	   public static final String URL = "jdbc:oracle:thin:@125.6.37.219:16000:xe";
+	   public static final String USER_ID ="knucircle";
+	   public static final String USER_PASSWD ="database322";
+	   
+	   
 	   
 	   private Connection conn = null; // Connection object
 	   private Statement stmt = null;   // Statement object
@@ -16,7 +24,7 @@ public class DBHelper {
 	         System.out.println("Success");
 	      } catch (ClassNotFoundException e1) {
 	         // TODO Auto-generated catch block
-	    	 System.out.println("¸Ó°¡¹®Á¦¾ß");
+	    	 System.out.println("ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 	         e1.printStackTrace();
 	         System.exit(1);
 	      }
