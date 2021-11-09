@@ -1,14 +1,16 @@
 package ConsoleProject;
 
+import java.sql.Date;
+
 public class User {
 	private String id;
 	private String pwd;
 	private String name;
 	private String email;
 	private String did;
-	private String birth_date;
+	private Date birth_date;
 	
-	public User(String id, String pwd, String name, String email, String did, String birth_date) {
+	public User(String id, String pwd, String name, String email, String did, Date birth_date) {
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
@@ -37,7 +39,29 @@ public class User {
 		return did;
 	}
 	
-	public String getUserBirthDate() {
+	public Date getUserBirthDate() {
 		return birth_date;
 	}
+
+	public void setUserName(String name) {
+		this.name = name;
+	}
+
+	public void setUserEmail(String email) {
+		this.email = email;
+	}
+
+	public void setUserDid(String did) {
+		this.did = did;
+	}
+
+	public void setUserBirth_date(Date birth_date) {
+		this.birth_date = birth_date;
+	}
+
+	public void setUserPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	
+	
 }
