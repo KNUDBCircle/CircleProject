@@ -108,7 +108,7 @@ public class enterCircle extends crud {
    private void run() {
 	   int num;  //메뉴번호 저장 
 	   while(true) {
-		   System.out.println("게시물 올리기(1) 게시물 조회하기(2) 게시물 관리하기(수정 및 삭제)(3) 게시물 삭제하기(4) 뒤로가기(5)");
+		   System.out.println("게시물 올리기(1) 게시물 조회하기(2) 게시물 관리하기(수정 및 삭제)(3) 뒤로가기(4)");
 		   System.out.println("-----숫자를 입력해주세요---->");
 		   
 		   num=input.nextInt();
@@ -158,9 +158,6 @@ public class enterCircle extends crud {
 			   
 			   
 		   case 4:  // 게시물 삭제하기  
-			   
-			   
-		   case 5:  //뒤로가기  
 			   break;
 	
 		   }

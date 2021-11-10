@@ -108,7 +108,7 @@ public class crud {
 		         System.exit(1);
 		      }
 
-		      System.out.print("댓글을 달고싶은경우 1 댓글을 보고싶은경우 2나가고 싶을 경우 0 을 입력해주세요: ");
+		      System.out.print("댓글을 달고싶은경우 1 댓글을 보고싶은경우 2 나가고 싶을 경우 0 을 입력해주세요: ");
 		      int choice = input.nextInt();
 		      if (choice == 0)
 		         return;
