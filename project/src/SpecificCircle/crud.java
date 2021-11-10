@@ -52,7 +52,7 @@ public class crud {
 		System.out.print("정말로 글을 등록하시겠습니까? 1:네 0:아니요(취소하기) :: ");
 		if(input.nextInt()==1)
 	    {
-			System.out.println(sql);
+			//System.out.println(sql);
 			if(db.updateSql(sql)== -1)
 			{	System.out.println("게시글을  등록하는 동안 오류가 발생 하였습니다.다시 시도해 주세요.");
 				
@@ -249,10 +249,10 @@ public class crud {
 		if (flag==1)   // 수정  
 		{
 			sql ="UPDATE BOARD SET content='"+content+"' where user_id='"+user.getUserId()+"' and tid="+Tid+" AND cid="+Cid+" AND id="+Bid;
-			System.out.println(sql + Bid);
+			//System.out.println(sql + Bid);
      		if(db.updateSql(sql)== -1)
-			{	System.out.println("게시글을  수정하는 동안 오류가 발생 하였습니다.다시 시도해 주세요.");
-				
+			{	
+     			System.out.println("게시글을  수정하는 동안 오류가 발생 하였습니다.다시 시도해 주세요.");
 			}
 			else
 				System.out.println("-----게시글이 성공적으로 수정 되었습니다.------");
@@ -260,13 +260,12 @@ public class crud {
 		else if (flag==0)  // 삭제 
 		{
 			sql="DELETE FROM BOARD where user_id='"+user.getUserId()+"' and tid="+Tid+" AND cid="+Cid+" AND id="+Bid;
-			System.out.println(sql);
-		       if(db.updateSql(sql)== -1)
-				{	System.out.println("게시글을  삭제하는  동안 오류가 발생 하였습니다.다시 시도해 주세요.");
-					
-				}
-				else
-					System.out.println("-----게시글이 성공적으로 수정 되었습니다.------");
+			//System.out.println(sql);
+		    if(db.updateSql(sql)== -1){	
+		    	System.out.println("게시글을  삭제하는  동안 오류가 발생 하였습니다.다시 시도해 주세요.");
+			}
+			else
+				System.out.println("-----게시글이 성공적으로 수정 되었습니다.------");
 		}
 		
        
@@ -378,7 +377,6 @@ public class crud {
 	
 	public int getCommentcount(int Bid,int Tid)
 	{
-		
 		int count = 0;
 		try {
 		
@@ -389,19 +387,17 @@ public class crud {
 			   	   
 			   ResultSet rs = db.runSql(sql);
 		  
-		         while(rs.next()) {  
-		            count = rs.getInt(1);
+			   while(rs.next()) {  
+				   count = rs.getInt(1);
 		           System.out.println("총 댓글 수 :"+count);
 		           
 		         }
-		       
 		         rs.close();
 			   }catch(SQLException ex2) {
 				   System.err.println("sql error= "+ex2.getMessage());
-				   System.exit(1);}
+				   System.exit(1);
+			   }
 		return count;
-		
-		
 	}
 
 	
@@ -416,8 +412,8 @@ public class crud {
 		sql="INSERT INTO COMMENTS VALUES("+(countC+1)+",TO_DATE('"+getCurrentDate()+"', 'yyyy/mm/dd HH24:MI'),'"+comment+"',"+Bid+","+Tid+","+Cid+",'"+user.getUserId()+"')";
 		//System.out.println(sql);
 		if(db.updateSql(sql)== -1)
-		{	System.out.println("댓글을  등록하는 동안 오류가 발생 하였습니다.다시 시도해 주세요.");
-			
+		{
+			System.out.println("댓글을  등록하는 동안 오류가 발생 하였습니다.다시 시도해 주세요.");
 		}
 		else
 			System.out.println("댓글이 성공적으로 등록되었습니다.");
@@ -426,37 +422,35 @@ public class crud {
 	}
 	
 	public void ShowPost(int tid,User user) {
-		
-			
-			
-			try {
-				   String sql="";
-				   sql="SELECT id,title,content,bdate "+
-				       "FROM BOARD b "+
-					   "WHERE user_id LIKE '%"+user.getUserId()+"%' AND tid="+tid+"AND cid="+Cid;
-				 
-				   ResultSet rs = db.runSql(sql);
-					  
-			         while(rs.next()) {  
-			            int id = rs.getInt(1);
-			            String title=rs.getString(2);
-			            String content=rs.getString(3);
-			            String bdate=rs.getString(4);
-			               
-			            System.out.println("-----------------------------------");
-			            System.out.println("번호 :"+id);   //게시글 아이디 
-			            System.out.println("제목 "+title);
-			            System.out.println("내용 "+content);
-			            System.out.println("작성일 "+bdate);
-			            System.out.println("-------------------------------------");
-			       
-				   }
-			         rs.close();
-			}catch(SQLException ex2) {
-					   System.err.println("sql error= "+ex2.getMessage());
-					   System.exit(1);}
-			
+		try {
+			String sql="";
+			sql="SELECT id,title,content,bdate "+
+			"FROM BOARD b "+
+			"WHERE user_id LIKE '%"+user.getUserId()+"%' AND tid="+tid+"AND cid="+Cid;
+			 
+			ResultSet rs = db.runSql(sql);
+			  
+			while(rs.next()) {  
+				int id = rs.getInt(1);
+				String title=rs.getString(2);
+				String content=rs.getString(3);
+				String bdate=rs.getString(4);
+				   
+				System.out.println("-----------------------------------");
+				System.out.println("번호 :"+id);   //게시글 아이디 
+				System.out.println("제목 "+title);
+				System.out.println("내용 "+content);
+				System.out.println("작성일 "+bdate);
+				System.out.println("-------------------------------------");
+			   
+			}
+			rs.close();
+		} catch(SQLException ex2) {
+			System.err.println("sql error= "+ex2.getMessage());
+			System.exit(1);
 		}
+			
+	}
 
 	
 	private void chekAuthority(User user2) {

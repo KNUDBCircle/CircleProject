@@ -62,7 +62,7 @@ public class Schedule {
 		System.out.print("정말로 스케쥴 을 등록하시겠습니까? 1:네 0:아니요(취소하기) :: ");
 		if(input.nextInt()==1)
 	    {
-			System.out.println(sql);
+			//System.out.println(sql);
 			if(db.updateSql(sql)== -1)
 			{	System.out.println("스케쥴을  등록하는 동안 오류가 발생 하였습니다.다시 시도해 주세요.");
 			
@@ -73,9 +73,6 @@ public class Schedule {
 	    }
 		else
 			return;
-		
-		
-
 	}
 
 	
@@ -232,7 +229,4 @@ public class Schedule {
 		
 	}
 	
-	
-	
-
 }
