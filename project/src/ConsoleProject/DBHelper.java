@@ -9,7 +9,7 @@ public class DBHelper {
 	   
 	   
 	   //김미주 
-	   public static final String URL = "jdbc:oracle:thin:@125.6.37.219:16000:xe";
+	   public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	   public static final String USER_ID ="knucircle";
 	   public static final String USER_PASSWD ="database322";
 	   
@@ -24,7 +24,7 @@ public class DBHelper {
 	         System.out.println("Success");
 	      } catch (ClassNotFoundException e1) {
 	         // TODO Auto-generated catch block
-	    	 System.out.println("connected");
+	    	 //System.out.println("connected");
 	         e1.printStackTrace();
 	         System.exit(1);
 	      }

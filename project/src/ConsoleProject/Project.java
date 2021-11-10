@@ -11,8 +11,7 @@ public class Project{
 	static UserManager um = new UserManager();
 	
 	public static void main(String[] args) {
-		
-<<<<<<< HEAD
+	
 		DBHelper.getInstance();
 		
 		while(signphase()) {
@@ -63,11 +62,14 @@ public class Project{
 				if(um.userConfig(sc, user) == 1) return;
 			}
 			else if(input.equals("2")) {
-				Circle circle = new Circle(user);
+				Circle circle = new Circle(user,sc);
 				circle.circlePage();
+
+				
 			}
 			else if(input.equals("3")) {
 				System.out.println("Bye bye!");
+				sc.close();
 				return;
 			}
 		}
