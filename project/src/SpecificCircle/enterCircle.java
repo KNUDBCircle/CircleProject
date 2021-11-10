@@ -223,7 +223,7 @@ public class enterCircle extends crud {
 			   break;
 			   
 		   case 2:  //스케줄 조회하기 
-			//  searchSchedule();
+			  s1.searchSchedule();
 			  break;
 			   
 			       
