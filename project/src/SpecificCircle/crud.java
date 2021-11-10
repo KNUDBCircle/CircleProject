@@ -20,12 +20,13 @@ public class crud {
 	public User user;
 	public Tab currentTab;
 	private int Cid;
+	Scanner input;
 
 
-
-	public crud(String name, User user) {
+	public crud(String name, User user,Scanner sc) {
 		circle_name=name;
 		this.user=user;
+		this.input = sc;
 		
 		Cid=getCid();
 		// TODO Auto-generated constructor stub

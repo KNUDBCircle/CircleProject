@@ -47,7 +47,7 @@ public class Circle {
 				submitCirclePage();
 			}
 			if (choice == 4) {
-				enterCircle c1 = new enterCircle("파도타기",user);
+				enterCircle c1 = new enterCircle("파도타기",user,sc);
 				c1.printMenu();
 			}
 			System.out.println("1.Create Circle    2.Search Circle    3.Submit Circle    4.Enter Circle    -1.Go Back");

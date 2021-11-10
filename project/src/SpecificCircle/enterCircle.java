@@ -23,8 +23,8 @@ public class enterCircle extends crud {
 //	 public Tab currentTab;
 	 
 	 
-	public enterCircle(String name,User user ){
-		super(name,user);
+	public enterCircle(String name,User user,Scanner sc){
+		super(name,user,sc);
 //		circle_name=name;
 //		this.user=user;	
 	}
@@ -39,7 +39,7 @@ public class enterCircle extends crud {
 //			System.out.println("Welcome "+circle_name );
 			System.out.println("----------Please select tab menu(현재 동아리:"+circle_name+")------ ");
 			getTname();    //circle 이름으로 동아리에 속한 tab 정보 가져오기 
-			Scanner input= new Scanner(System.in);
+			
 			
 			System.out.println("0번 "+circle_name+"에서 나가기  ");
 			for (Tab i :tab_info) {
@@ -95,7 +95,6 @@ public class enterCircle extends crud {
    private void run() {
 	   int num;  //메뉴번호 저장 
 	   while(true) {
-		   Scanner input=new Scanner(System.in);
 		   System.out.println("게시물 올리기(1) 게시물 조회하기(2) 게시물 관리하기(수정 및 삭제)(3) 게시물 삭제하기(4) 뒤로가기(5)");
 		   System.out.println("-----숫자를 입력해주세요---->");
 		   
