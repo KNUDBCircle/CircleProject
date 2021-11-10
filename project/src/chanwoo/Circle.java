@@ -22,18 +22,15 @@ public class Circle {
 	Date endDate;
 	Scanner sc;
 
-	public Circle(User user) {
+	public Circle(User user,Scanner sc) {
 		this.db = DBHelper.getInstance();
 		this.user = user;
+		this.sc = sc;
 	}
 
 	public void circlePage() {
-		sc = new Scanner(System.in);
-		System.out.println("1.Create Circle");
-		System.out.println("2.Search Circle");
-		System.out.println("3.Submit Circle");
-		System.out.println("4.Enter Circle");
-		System.out.println("-1.Go Back");
+		System.out.println("1.Create Circle    2.Search Circle    3.Submit Circle    4.Enter Circle    -1.Go Back");
+	
 		int choice = sc.nextInt();
 		while (choice != -1) {
 
@@ -50,18 +47,16 @@ public class Circle {
 				submitCirclePage();
 			}
 			if (choice == 4) {
-//				enterCircle c1=new enterCircle("파도타기",user);
-//			     
-//			    c1.printMenu();
+				this.showCircleList();
+				System.out.println("input circe id:");
+				id = sc.nextInt();
+				enterCircle c1 = new enterCircle(id,user,sc);
+				c1.printMenu();
 			}
-			System.out.println("1.Create Circle");
-			System.out.println("2.Search Circle");
-			System.out.println("3.Submit Circle");
-			System.out.println("4.Enter Circle");
-			System.out.println("-1.Go Back");
+			System.out.println("1.Create Circle    2.Search Circle    3.Submit Circle    4.Enter Circle    -1.Go Back");
 			choice = sc.nextInt();
 		}
-		sc.close();
+		
 	}
 
 	public int searchCirclePage() {
@@ -114,6 +109,8 @@ public class Circle {
 		cname = sc.next();
 		System.out.print("Description: ");
 		description = sc.next();
+		System.out.print("Manager's phone Number ex)01012345678: ");
+		phoneNum = sc.next();
 		System.out.print("is Circle? (Y/N): ");
 		isCircle = sc.next();
 		Category.showCategory(db);
@@ -150,7 +147,7 @@ public class Circle {
 			tempString = "TO_DATE('" + tempString + "', 'yyyy-mm-dd'), ";
 		else if (tempString.equals("NULL"))
 			tempString += ", ";
-		else if (tempString.matches(".*[a-zA-Zㄱ-ㅎㅏ-ㅣ가-R].*") || tempString.length() > 8)
+		else if (tempString.matches(".*[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣].*") || tempString.length() > 8)
 			tempString = "'" + tempString + "', ";
 		else
 			tempString += ", ";
@@ -206,7 +203,6 @@ public class Circle {
 		sql += makeToken("NULL");
 		sql = sql.substring(0, sql.length() - 2);
 		sql += ")";
-		System.out.println(sql);
 		return sql;
 	}
 }

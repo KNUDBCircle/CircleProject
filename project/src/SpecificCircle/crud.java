@@ -16,18 +16,19 @@ public class crud {
 	
 	static DBHelper db = DBHelper.getInstance();
 	
-	public String circle_name;
+	public String circleName;
 	public User user;
 	public Tab currentTab;
 	private int Cid;
+	Scanner input;
 
 
-
-	public crud(String name, User user) {
-		circle_name=name;
+	public crud(int cid, User user,Scanner sc) {
+		this.Cid = cid;
 		this.user=user;
-		
-		Cid=getCid();
+		this.input = sc;
+		this.circleName = getCircleName();
+		//Cid=getCid();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -43,7 +44,6 @@ public class crud {
 		int tid=getTid();
 		int countB=0;
 		countB=getBoardcount(tid);     //getBoardCount는 해당 tab의 총 게시물 갯수를 return. 
-	
 
 		String sql="";
 		
@@ -74,7 +74,6 @@ public class crud {
 		int Tid=getTid();
 		int Bid=0;
 		String comment="";
-	
 		try {
 			
 			String sql="";
@@ -226,7 +225,7 @@ public class crud {
 		}
 		else if (flag==0)  // 삭제 
 		{
-			sql="DELETE FROM BOARD where user_id='"+user.getUserId()+"' and tid="+Tid+" AND cid="+Cid+" AND id="+Bid+" CASCADE CONSTRAINTS";
+			sql="DELETE FROM BOARD where user_id='"+user.getUserId()+"' and tid="+Tid+" AND cid="+Cid+" AND id="+Bid;
 			System.out.println(sql);
 		       if(db.updateSql(sql)== -1)
 				{	System.out.println("게시글을  삭제하는  동안 오류가 발생 하였습니다.다시 시도해 주세요.");
@@ -242,18 +241,38 @@ public class crud {
 	
  
 
-
+	public String getCircleName() {
+		String cName = null;
+		try {
+			   String sql="";
+			   sql="SELECT C.Cname "+
+			       "FROM CIRCLE C "+
+				   "WHERE C.id = "+String.valueOf(Cid);
+			   	   
+			   ResultSet rs = db.runSql(sql);
+		  
+		         while(rs.next()) {  
+		            cName = rs.getString(1);
+		          //  System.out.println(cname+":"+Cid);
+		           
+		         }
+		       
+		         rs.close();
+			   }catch(SQLException ex2) {
+				   System.err.println("sql error= "+ex2.getMessage());
+				   System.exit(1);}
+		
+		return cName;
+	}
 	
 
 	public int getCid() {
 		int cid = 0;
 		try {
-			
-
 			   String sql="";
 			   sql="SELECT C.id "+
 			       "FROM CIRCLE C "+
-				   "WHERE C.cname LIKE '%"+circle_name+"%'";
+				   "WHERE C.cname LIKE '%"+circleName+"%'";
 			   	   
 			   ResultSet rs = db.runSql(sql);
 		  
@@ -272,7 +291,7 @@ public class crud {
 	
 	public int getTid() {
 		int tid = 0;
-		System.out.println(currentTab);
+	
 		try {
 			
 
@@ -350,6 +369,7 @@ public class crud {
 		
 		
 	}
+
 	
 	public void makeComment(int Bid, int Cid,int Tid,User user,String comment) {
 		
