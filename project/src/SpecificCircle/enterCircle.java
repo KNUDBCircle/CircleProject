@@ -17,18 +17,16 @@ import ConsoleProject.User;
 public class enterCircle extends crud {
 	
 //	 static DBHelper db = DBHelper.getInstance();
-	
-	 public String circle_name;
-	 public User user;
-	 
+
 	 
 	 public static ArrayList<Tab> tab_info= new ArrayList<Tab>();//타입설정 Student객체만 사용가능
-	 public Tab currentTab;
+//	 public Tab currentTab;
 	 
 	 
 	public enterCircle(String name,User user ){
-		circle_name=name;
-		this.user=user;	
+		super(name,user);
+//		circle_name=name;
+//		this.user=user;	
 	}
 	
 
@@ -126,23 +124,24 @@ public class enterCircle extends crud {
 			              
 			          }
 			      System.out.println("제목: "+title+"  내용: "+sb.toString());
-		          makePost(title, sb.toString(),circle_name,currentTab.tabname,user);
+		          makePost(title, sb.toString());
 			          
 
 			      }
 			      catch (Exception e)
 			      {
 			          e.printStackTrace();
+			        
 			      }
 			   break;
 			   
 		   case 2:  //게시물 조회하기 
-			  searchPost(circle_name,currentTab.tabname,user);
+			  searchPost();
 			  break;
 			   
 			       
 		   case 3:  //게시물 수정 및 삭제하기 
-			   modifyPost(circle_name,currentTab.tabname,user);
+			   modifyPost();
 			   break;
 			   
 			   
@@ -257,7 +256,8 @@ public  void getTname() {
 	   
 	   int count=0;
 	   String sql="";
-	   int cid=getCid(circle_name);
+//	   int cid=getCid();
+	   
 	   
 	   try {
 		   
@@ -276,7 +276,7 @@ public  void getTname() {
 	
 	  
 	   
-		sql="INSERT INTO TAB_MENU VALUES("+(count+1)+","+cid+",'"+tabTitle+"')";
+		sql="INSERT INTO TAB_MENU VALUES("+(count+1)+","+returnCid()+",'"+tabTitle+"')";
 		System.out.println(sql);
 		if(db.updateSql(sql)!= -1)
 		{	

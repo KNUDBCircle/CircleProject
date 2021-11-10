@@ -15,29 +15,41 @@ import ConsoleProject.User;
 public class crud {
 	
 	static DBHelper db = DBHelper.getInstance();
-	Date now = new Date();
-
 	
-	
+	public String circle_name;
+	public User user;
+	public Tab currentTab;
+	private int Cid;
 
-	public void makePost(String title, String contents, String cname,String tname,User user) {
+
+
+	public crud(String name, User user) {
+		circle_name=name;
+		this.user=user;
+		
+		Cid=getCid();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public int returnCid() {
+		return Cid;
+	}
+
+
+	public void makePost(String title, String contents) {
 		
 		
-		int cid=getCid(cname);
-		int tid=getTid(tname,cid);
+		//int cid=getCid();
+		int tid=getTid();
 		int countB=0;
-		countB=getBoardcount(cid,tid);     //getBoardCount는 해당 tab의 총 게시물 갯수를 return. 
+		countB=getBoardcount(tid);     //getBoardCount는 해당 tab의 총 게시물 갯수를 return. 
 		
 		Scanner input=new Scanner(System.in);
 	
-		//System.out.println(now); 현재 시간 출력 
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-		String formatedNow = formatter.format(now); // 포맷팅 적용
-		
 
 		String sql="";
 		
-		sql="INSERT INTO BOARD VALUES("+(countB+1)+",TO_DATE('"+formatedNow+"', 'yyyy/mm/dd HH24:MI'),'"+title+"','"+contents+"',"+tid+","+cid+",'"+user.getUserId()+"')";
+		sql="INSERT INTO BOARD VALUES("+(countB+1)+",TO_DATE('"+getCurrentDate()+"', 'yyyy/mm/dd HH24:MI'),'"+title+"','"+contents+"',"+tid+","+Cid+",'"+user.getUserId()+"')";
 		
 		System.out.print("정말로 글을 등록하시겠습니까? 1:네 0:아니요(취소하기) :: ");
 		if(input.nextInt()==1)
@@ -57,11 +69,11 @@ public class crud {
 	}
 	
 	
-	public void searchPost(String cname, String tname,User user){
+	public void searchPost(){
 		
 		
-		int Cid=getCid(cname);
-		int Tid=getTid(tname,Cid);
+		//int Cid=getCid();
+		int Tid=getTid();
 		int Bid=0;
 		String comment="";
 		Scanner input=new Scanner(System.in);
@@ -127,19 +139,19 @@ public class crud {
 	}
 	
 	
-	  public  void modifyPost(String circle_name2, String tabname, User user2) {
+	  public  void modifyPost() {
 		// TODO Auto-generated method stub
 		//chekAuthority(user2);
 	
 		int Bid=0;
-		int Cid=getCid(circle_name2);
-		int Tid=getTid(tabname,Cid);
+		//int Cid=getCid();
+		int Tid=getTid();
 		String sql="";
 		Scanner input=new Scanner(System.in);
 		
 		
 		System.out.println("---------------내가 작성한 게시글------------- ");
-        ShowPost(Cid,Tid,user2);
+        ShowPost(Tid,user);
         System.out.println("---------------여기까지 입니다.------------- ");
       
     
@@ -167,7 +179,7 @@ public class crud {
  			              
  			          }
  			      System.out.println("내용: "+sb.toString());
- 		          updatePost(1,sb.toString(),Cid,Tid,Bid,user2);  //1이면 update
+ 		          updatePost(1,sb.toString(),Tid,Bid,user);  //1이면 update
  			          
 
  			      }
@@ -180,7 +192,7 @@ public class crud {
              case "2":
             	 System.out.print("삭제하고 싶은 게시물의 번호: ");
          		 Bid=Integer.parseInt(input.next());
-         		 updatePost(0,null,Cid,Tid,Bid,user2);  //0이면 delete
+         		 updatePost(0,null,Tid,Bid,user);  //0이면 delete
              	
          		 
              	break;
@@ -200,7 +212,7 @@ public class crud {
 		
 	}
 	
-	public void updatePost(int flag,String content,int Cid,int Tid,int Bid,User user) {   //게시글 수정 ,삭제 
+	public void updatePost(int flag,String content,int Tid,int Bid,User user) {   //게시글 수정 ,삭제 
 		
 	// System.out.println("게시글 수정 ");
 		String sql="";
@@ -208,6 +220,7 @@ public class crud {
 		if (flag==1)   // 수정  
 		{
 			sql ="UPDATE BOARD SET content='"+content+"' where user_id='"+user.getUserId()+"' and tid="+Tid+" AND cid="+Cid+" AND id="+Bid;
+			System.out.println(sql + Bid);
      		if(db.updateSql(sql)== -1)
 			{	System.out.println("게시글을  수정하는 동안 오류가 발생 하였습니다.다시 시도해 주세요.");
 				
@@ -236,7 +249,7 @@ public class crud {
 
 	
 
-	public int getCid(String cname) {
+	public int getCid() {
 		int cid = 0;
 		try {
 			
@@ -244,13 +257,13 @@ public class crud {
 			   String sql="";
 			   sql="SELECT C.id "+
 			       "FROM CIRCLE C "+
-				   "WHERE C.cname LIKE '%"+cname+"%'";
+				   "WHERE C.cname LIKE '%"+circle_name+"%'";
 			   	   
 			   ResultSet rs = db.runSql(sql);
 		  
 		         while(rs.next()) {  
 		            cid = rs.getInt(1);
-		          //  System.out.println(cname+":"+cid);
+		          //  System.out.println(cname+":"+Cid);
 		           
 		         }
 		       
@@ -261,15 +274,16 @@ public class crud {
 		return cid; 		
 	}
 	
-	public int getTid(String tname,int cid) {
+	public int getTid() {
 		int tid = 0;
+		System.out.println(currentTab);
 		try {
 			
 
 			   String sql="";
 			   sql="SELECT T.id "+
 			       "FROM TAB_MENU T "+
-				   "WHERE T.tname LIKE '%"+tname+"%' AND T.cid="+cid;
+				   "WHERE T.tname LIKE '%"+currentTab.tabname+"%' AND T.cid="+Cid;
 			   	   
 			   ResultSet rs = db.runSql(sql);
 		  
@@ -286,7 +300,7 @@ public class crud {
 		return tid; 		
 	}	
 	
-	public int getBoardcount(int Cid,int Tid) {
+	public int getBoardcount(int Tid) {
 		
 		int count = 0;
 		try {
@@ -313,7 +327,7 @@ public class crud {
 		
 	}
 	
-	public int getCommentcount(int Bid, int Cid,int Tid)
+	public int getCommentcount(int Bid,int Tid)
 	{
 		
 		int count = 0;
@@ -344,14 +358,12 @@ public class crud {
 	public void makeComment(int Bid, int Cid,int Tid,User user,String comment) {
 		
 		
-	   int countC=getCommentcount(Bid,Cid,Tid);
+	   int countC=getCommentcount(Bid,Tid);
 	   
 	  
- 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
- 		String formatedNow = formatter.format(now); // 포맷팅 적용
 		
 		String sql="";
-		sql="INSERT INTO COMMENTS VALUES("+(countC+1)+",TO_DATE('"+formatedNow+"', 'yyyy/mm/dd HH24:MI'),'"+comment+"',"+Bid+","+Tid+","+Cid+",'"+user.getUserId()+"')";
+		sql="INSERT INTO COMMENTS VALUES("+(countC+1)+",TO_DATE('"+getCurrentDate()+"', 'yyyy/mm/dd HH24:MI'),'"+comment+"',"+Bid+","+Tid+","+Cid+",'"+user.getUserId()+"')";
 		//System.out.println(sql);
 		if(db.updateSql(sql)== -1)
 		{	System.out.println("댓글을  등록하는 동안 오류가 발생 하였습니다.다시 시도해 주세요.");
@@ -363,7 +375,7 @@ public class crud {
 		
 	}
 	
-	public void ShowPost(int cid,int tid,User user) {
+	public void ShowPost(int tid,User user) {
 		
 			
 			
@@ -371,7 +383,7 @@ public class crud {
 				   String sql="";
 				   sql="SELECT id,title,content,bdate "+
 				       "FROM BOARD b "+
-					   "WHERE user_id LIKE '%"+user.getUserId()+"%' AND tid="+tid+"AND cid="+cid;
+					   "WHERE user_id LIKE '%"+user.getUserId()+"%' AND tid="+tid+"AND cid="+Cid;
 				 
 				   ResultSet rs = db.runSql(sql);
 					  
@@ -401,6 +413,14 @@ public class crud {
 		// TODO Auto-generated method stub
 		
 		System.out.println("권한이 있습니다.");
+		
+	}
+	private String getCurrentDate() {
+		//System.out.println(now); 현재 시간 출력 
+		Date now = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		String formatedNow = formatter.format(now); // 포맷팅 적용
+		return formatedNow;
 		
 	}
 	

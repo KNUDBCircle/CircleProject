@@ -12,6 +12,7 @@ public class Project{
 	
 	public static void main(String[] args) {
 		
+<<<<<<< HEAD
 		DBHelper.getInstance();
 		
 		while(signphase()) {
