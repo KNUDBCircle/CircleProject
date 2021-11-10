@@ -38,7 +38,7 @@ public class Project{
 		}
 		else if(input.equals("2")) {
 			user = um.getUserInfoByConsole(sc);
-			if(um.addUser(user) == 1) {
+			if(user != null && um.addUser(user) == 1) {
 				System.out.println("Successfully Create User!");
 				afterSignIn();
 			}
@@ -74,7 +74,6 @@ public class Project{
 			}
 			else if(input.equals("3")) {
 				System.out.println("Bye bye!");
-				sc.close();
 				return;
 			}
 		}

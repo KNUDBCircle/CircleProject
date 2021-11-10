@@ -56,7 +56,13 @@ public class UserManager {
 			else System.out.println("Input Numeric Data");
 		}
 		
-		User user = new User(id, pwd, name, email, did, Date.valueOf(birth_year + "-" + birth_month + "-" + birth_day));
+		User user = null;
+		
+		try {
+			user = new User(id, pwd, name, email, did, Date.valueOf(birth_year + "-" + birth_month + "-" + birth_day));
+		} catch (IllegalArgumentException e) {
+			return null;
+		}
 		
 		return user;
 	}
@@ -191,10 +197,16 @@ public class UserManager {
 					if(checkInt(birth_day)) break;
 					else System.out.println("Input Numeric Data");
 				}
-				user.setUserDid(did);
-				user.setUserEmail(email);
-				user.setUserBirth_date(Date.valueOf(birth_year + "-" + birth_month + "-" + birth_day));
-				updateUser(user);
+				try {
+					user.setUserBirth_date(Date.valueOf(birth_year + "-" + birth_month + "-" + birth_day));
+					user.setUserDid(did);
+					user.setUserEmail(email);
+				} catch (IllegalArgumentException e) {
+					System.out.println("Error to update user");
+					return 0;
+				}
+				if(updateUser(user) == 1)
+					System.out.println("Update success");
 				return 0;
 			}
 			else if(input.equals("2")) {
