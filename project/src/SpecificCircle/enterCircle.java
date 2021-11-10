@@ -43,7 +43,7 @@ public class enterCircle extends crud {
 			getTname();    //circle 이름으로 동아리에 속한 tab 정보 가져오기 
 			Scanner input= new Scanner(System.in);
 			
-			System.out.println("0번 뒤로가기 ");
+			System.out.println("0번 "+circle_name+"에서 나가기  ");
 			for (Tab i :tab_info) {
 				System.out.println(i);
 			}
@@ -72,11 +72,11 @@ public class enterCircle extends crud {
 			currentTab=getCurrentTab(num);   //현재 위치하고있는 탭 메뉴
 			System.out.println(currentTab+"으로 이동하였습니다.");
 			
-			if (checkManager(user)&&(currentTab.tabname).equals("TAB 추가하기"))
+			if (checkManager(user)&&(currentTab.tabname).equals("TAB 추가하기"))      //매니저일 경우 탭 추가 가능 
 			{
 				System.out.print("Tab 이름: ");
 			    String tabTitle=input.next();
-			    System.out.println("정말로 "+ tabTitle+"을 추가하시겠습니?  1:예 0:아니요 :: ");
+			    System.out.println("정말로 "+ tabTitle+"을 추가하시겠습니까 ?  1:예 0:아니요 :: ");
 				if(input.nextInt()==1)
 					addTab(tabTitle);
 			        
@@ -98,7 +98,7 @@ public class enterCircle extends crud {
 	   int num;  //메뉴번호 저장 
 	   while(true) {
 		   Scanner input=new Scanner(System.in);
-		   System.out.println("게시물 올리기(1) 게시물 조회하기(2) 게시물 수정하기(3) 게시물 삭제하기(4) 뒤로가기(5)");
+		   System.out.println("게시물 올리기(1) 게시물 조회하기(2) 게시물 관리하기(수정 및 삭제)(3) 게시물 삭제하기(4) 뒤로가기(5)");
 		   System.out.println("-----숫자를 입력해주세요---->");
 		   
 		   num=input.nextInt();
@@ -137,15 +137,16 @@ public class enterCircle extends crud {
 			   break;
 			   
 		   case 2:  //게시물 조회하기 
-			  searchPost(circle_name,currentTab.tabname);
+			  searchPost(circle_name,currentTab.tabname,user);
 			  break;
 			   
-			 
 			       
-		   case 3:  //게시물 수정하기 
+		   case 3:  //게시물 수정 및 삭제하기 
+			   modifyPost(circle_name,currentTab.tabname,user);
+			   break;
 			   
 			   
-		   case 4:  //게시물 삭제하기 
+		   case 4:  // 게시물 삭제하기  
 			   
 			   
 		   case 5:  //뒤로가기  
@@ -164,9 +165,11 @@ public class enterCircle extends crud {
 
 
 
-   public  void getTname() {
+
+
+public  void getTname() {
 	   
-	   int count=1;
+	   int count=1;   //tabcount
 	 
 	   try {
 
@@ -282,8 +285,6 @@ public class enterCircle extends crud {
 	
 	   
 	 
-   
-   
 
   }
    

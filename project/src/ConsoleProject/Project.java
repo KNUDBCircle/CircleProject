@@ -2,6 +2,7 @@ package ConsoleProject;
 
 import chanwoo.*;
 import java.sql.*;
+import java.util.Scanner;
 
 import SpecificCircle.*;
 
@@ -14,8 +15,11 @@ public class Project {
 	    enterCircle c1=new enterCircle("파도타기",user1);
 	     
 	    c1.printMenu();
-	      
-	    System.out.println("나옴 !");
+		
+		
+		
+		System.out.println("나옴 !");
+	    
 
 	}
 
