@@ -133,8 +133,8 @@ public class Schedule {
 		if ( countbyme>0)
 		{
 			System.out.print("삭제하고 싶은 스케줄이 있으신가요? 1:예 2: 아니요 ");
-			System.out.println("내가 작성한 스케줄들 ");
 		    if (input.nextInt()==1) {
+		    	System.out.println("--내가 작성한 스케줄들--");
 		    	for (int i : myScheduleList) {
 		    		System.out.println(i+"번 ");
 		    		
