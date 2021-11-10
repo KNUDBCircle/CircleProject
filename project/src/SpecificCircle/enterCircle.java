@@ -25,7 +25,7 @@ public class enterCircle extends crud {
 	 
 	public enterCircle(int id,User user,Scanner sc){
 		super(id,user,sc);
-//		circle_name=name;
+//		circleName=name;
 //		this.user=user;	
 	}
 	
@@ -33,15 +33,15 @@ public class enterCircle extends crud {
 	public void printMenu() {
 	
 		int num;
-		System.out.println("Welcome "+circle_name );
+		System.out.println("Welcome "+circleName );
 		while(true)
 		{	
-//			System.out.println("Welcome "+circle_name );
-			System.out.println("----------Please select tab menu(현재 동아리:"+circle_name+")------ ");
+//			System.out.println("Welcome "+circleName );
+			System.out.println("----------Please select tab menu(현재 동아리:"+circleName+")------ ");
 			getTname();    //circle 이름으로 동아리에 속한 tab 정보 가져오기 
 			
 			
-			System.out.println("0번 "+circle_name+"에서 나가기  ");
+			System.out.println("0번 "+circleName+"에서 나가기  ");
 			for (Tab i :tab_info) {
 				System.out.println(i);
 			}
@@ -52,12 +52,12 @@ public class enterCircle extends crud {
 			
 			if (num==0)
 			{
-				System.out.println("정말로 "+ circle_name+"을 나가시겠습니까?  1:예 0:아니요 :: ");
+				System.out.println("정말로 "+ circleName+"을 나가시겠습니까?  1:예 0:아니요 :: ");
 				if(input.nextInt()==1)
 					return;
 				else {
 					
-					System.out.println("----------Please select tab menu(현재 동아리:"+circle_name+")------ ");
+					System.out.println("----------Please select tab menu(현재 동아리:"+circleName+")------ ");
 					for (Tab i :tab_info) {
 						System.out.println(i);
 					}
@@ -170,7 +170,7 @@ public  void getTname() {
 	
 		sql="SELECT tname "+
 		   	   "FROM tab_menu t, circle c " +
-		   	   "WHERE c.cname LIKE '%"+circle_name+"%' AND c.id=t.cid ";
+		   	   "WHERE c.cname LIKE '%"+circleName+"%' AND c.id=t.cid ";
  
 	
 	   ResultSet rs = db.runSql(sql);
@@ -220,7 +220,7 @@ public  void getTname() {
 		   String sql="";
 			sql="SELECT manager "+
 			   	   "FROM circle c " +
-			   	   "WHERE c.cname LIKE '%"+circle_name+"%' ";
+			   	   "WHERE c.cname LIKE '%"+circleName+"%' ";
 	 
 		
 		   ResultSet rs = db.runSql(sql);
