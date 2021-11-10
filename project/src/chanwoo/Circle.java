@@ -136,9 +136,10 @@ public class Circle {
 		showCircleList();
 		System.out.println("Input the ID of the circle you want to submit: ");
 		id = sc.nextInt();
-		submitCircle(id);
-		System.out.println("submit complete ");
-		
+		if(checkSubmit(id)) {
+			submitCircle(id);
+			System.out.println("submit complete ");
+		}
 		return 3;
 	}
 	public void submitCircle(int cid){
@@ -148,7 +149,26 @@ public class Circle {
 		
 	}
 	
-	
+	public boolean checkSubmit(int cid) {
+		ResultSet rs = null;
+		String sql = "select user_id from belongs_to where cid = " + cid+ " and user_id = '" +user.getUserId() +"'";
+		rs = db.runSql(sql);
+		try {
+			if(rs.next()) {
+				rs.close();
+				System.out.println("you have already joined this circle");
+				return false;
+			}
+			else {
+				rs.close();
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;		
+	}
 	public boolean checkEnter(int cid) {
 		ResultSet rs = null;
 		String sql = "select user_id from belongs_to where cid = " + cid+ " and user_id = '" +user.getUserId() +"'";
@@ -184,7 +204,7 @@ public class Circle {
 		ResultSet rs = null;
 		String sql = "select distinct c.id, c.cname \r\n"
 				+ "from belongs_to b, circle c\r\n"
-				+ "where b.user_id = '"+  user.getUserId() +"' and b.cid = c.id";
+				+ "where b.user_id = '"+  user.getUserId() +"' and b.cid = c.id order by c.id asc";
 		rs = db.runSql(sql);
 		try {
 			while (rs.next()) {
