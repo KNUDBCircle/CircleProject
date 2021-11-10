@@ -16,7 +16,7 @@ public class crud {
 	
 	static DBHelper db = DBHelper.getInstance();
 	
-	public String circle_name;
+	public String circleName;
 	public User user;
 	public Tab currentTab;
 	private int Cid;
@@ -27,7 +27,7 @@ public class crud {
 		this.Cid = cid;
 		this.user=user;
 		this.input = sc;
-		circle_name = getCircleName();
+		this.circleName = getCircleName();
 		//Cid=getCid();
 		// TODO Auto-generated constructor stub
 	}
@@ -231,7 +231,7 @@ public class crud {
 		}
 		else if (flag==0)  // 삭제 
 		{
-			sql="DELETE FROM BOARD where user_id='"+user.getUserId()+"' and tid="+Tid+" AND cid="+Cid+" AND id="+Bid+" CASCADE CONSTRAINTS";
+			sql="DELETE FROM BOARD where user_id='"+user.getUserId()+"' and tid="+Tid+" AND cid="+Cid+" AND id="+Bid;
 			System.out.println(sql);
 		       if(db.updateSql(sql)== -1)
 				{	System.out.println("게시글을  삭제하는  동안 오류가 발생 하였습니다.다시 시도해 주세요.");
@@ -258,7 +258,7 @@ public class crud {
 			   ResultSet rs = db.runSql(sql);
 		  
 		         while(rs.next()) {  
-		            circle_name = rs.getString(1);
+		            cName = rs.getString(1);
 		          //  System.out.println(cname+":"+Cid);
 		           
 		         }
@@ -278,7 +278,7 @@ public class crud {
 			   String sql="";
 			   sql="SELECT C.id "+
 			       "FROM CIRCLE C "+
-				   "WHERE C.cname LIKE '%"+circle_name+"%'";
+				   "WHERE C.cname LIKE '%"+circleName+"%'";
 			   	   
 			   ResultSet rs = db.runSql(sql);
 		  
@@ -297,7 +297,7 @@ public class crud {
 	
 	public int getTid() {
 		int tid = 0;
-		System.out.println(currentTab);
+	
 		try {
 			
 
