@@ -23,12 +23,12 @@ public class crud {
 	Scanner input;
 
 
-	public crud(String name, User user,Scanner sc) {
-		circle_name=name;
+	public crud(int cid, User user,Scanner sc) {
+		this.Cid = cid;
 		this.user=user;
 		this.input = sc;
-		
-		Cid=getCid();
+		circle_name = getCircleName();
+		//Cid=getCid();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -247,14 +247,34 @@ public class crud {
 	
  
 
-
+	public String getCircleName() {
+		String cName = null;
+		try {
+			   String sql="";
+			   sql="SELECT C.Cname "+
+			       "FROM CIRCLE C "+
+				   "WHERE C.id = "+String.valueOf(Cid);
+			   	   
+			   ResultSet rs = db.runSql(sql);
+		  
+		         while(rs.next()) {  
+		            circle_name = rs.getString(1);
+		          //  System.out.println(cname+":"+Cid);
+		           
+		         }
+		       
+		         rs.close();
+			   }catch(SQLException ex2) {
+				   System.err.println("sql error= "+ex2.getMessage());
+				   System.exit(1);}
+		
+		return cName;
+	}
 	
 
 	public int getCid() {
 		int cid = 0;
 		try {
-			
-
 			   String sql="";
 			   sql="SELECT C.id "+
 			       "FROM CIRCLE C "+
@@ -355,6 +375,7 @@ public class crud {
 		
 		
 	}
+
 	
 	public void makeComment(int Bid, int Cid,int Tid,User user,String comment) {
 		

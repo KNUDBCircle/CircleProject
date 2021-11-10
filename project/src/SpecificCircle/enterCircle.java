@@ -23,8 +23,8 @@ public class enterCircle extends crud {
 //	 public Tab currentTab;
 	 
 	 
-	public enterCircle(String name,User user,Scanner sc){
-		super(name,user,sc);
+	public enterCircle(int id,User user,Scanner sc){
+		super(id,user,sc);
 //		circle_name=name;
 //		this.user=user;	
 	}
@@ -106,7 +106,7 @@ public class enterCircle extends crud {
 			   System.out.print("제목을  입력하세요 : ");
 			   String title=input.nextLine();
 			   title=input.nextLine();
-			   System.out.print("내용을 입력하세요 <엔터+exit>을 하게되 종료됩니다. : ");
+			   System.out.print("내용을 입력하세요 마지막 줄에 exit을 입력하면 종료됩니다. : ");
 			   try
 			      {
 			          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -159,11 +159,6 @@ public class enterCircle extends crud {
 	   
 		
 	}
-
-
-
-
-
 
 public  void getTname() {
 	   
