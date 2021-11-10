@@ -67,72 +67,106 @@ public class crud {
 	}
 	
 	
-	public void searchPost(Scanner input){
-		
-		
-		//int Cid=getCid();
-		int Tid=getTid();
-		int Bid=0;
-		String comment="";
-		try {
-			
-			String sql="";
-			sql="SELECT ID,BDATE,TITLE,CONTENT,USER_ID "+
-				       "FROM BOARD B "+
-					   "WHERE B.tid="+Tid+" AND B.cid="+Cid+
-					  "ORDER BY BDATE DESC";
-			   	   
-			   ResultSet rs = db.runSql(sql);
-		  
-		         while(rs.next()) {  
+	   public void searchPost() {
+
+		      // int Cid=getCid();
+		      int Tid = getTid();
+		      int Bid = 0;
+		      String comment = "";
+		      Scanner input = new Scanner(System.in);
+
+		      try {
+
+		         String sql = "";
+		         sql = "SELECT ID,BDATE,TITLE,CONTENT,USER_ID " + "FROM BOARD B " + "WHERE B.tid=" + Tid + " AND B.cid="
+		               + Cid + "ORDER BY BDATE DESC";
+
+		         ResultSet rs = db.runSql(sql);
+
+		         while (rs.next()) {
 		            int id = rs.getInt(1);
-		            String date=rs.getString(2);
-		            String title=rs.getString(3);
-		            String content=rs.getString(4);
-		            String userId=rs.getString(5);
-		            
+		            String date = rs.getString(2);
+		            String title = rs.getString(3);
+		            String content = rs.getString(4);
+		            String userId = rs.getString(5);
+
 		            System.out.println("-----------------------------------");
-		            System.out.println("번호 :"+id);   //보드 아이
-		            System.out.println("제목 "+title);
-		            System.out.println("내용 "+content);
-		            System.out.println("작성일 "+date);
-		            System.out.println("작성자 "+userId);
+		            System.out.println("번호 :" + id); // 보드 아이
+		            System.out.println("제목 " + title);
+		            System.out.println("내용 " + content);
+		            System.out.println("작성일 " + date);
+		            System.out.println("작성자 " + userId);
 		            System.out.println("-------------------------------------");
-		            
-		          //  System.out.println(cname+":"+cid);
-		           
+
+		            // System.out.println(cname+":"+cid);
+
 		         }
-		       
+
 		         rs.close();
-			   }catch(SQLException ex2) {
-				   System.err.println("sql error= "+ex2.getMessage());
-				   System.exit(1);}
-		
-			System.out.print("댓글을 달고 싶은 경우 1 나가고 싶을 경우 0 을 입력해주세요: ");
-			if(input.nextInt()==0)
-				return;
-			
-			System.out.println("댓글을 작성하고 싶은 게시물의 번호를 적어주세요");
-		
-			Bid=Integer.parseInt(input.next());
-			
-			System.out.print(Bid+"번 게시글에 남길 댓글을 작성해주세요(한줄만 허용 ): ");
-			
-			input.nextLine();
-			
-		    comment=input.nextLine();
-			System.out.print("'"+comment+"'"+"\n위 내용을 정말로 남기겠습니까? 1:네 0:아니요 ::");
-			if (input.nextInt()==0)
-			{
-				return;
-			}
-			
-		   makeComment(Bid,Cid,Tid,user,comment);
-			
-		
-	
-		
-	}
+		      } catch (SQLException ex2) {
+		         System.err.println("sql error= " + ex2.getMessage());
+		         System.exit(1);
+		      }
+
+		      System.out.print("댓글을 달고싶은경우 1 댓글을 보고싶은경우 2나가고 싶을 경우 0 을 입력해주세요: ");
+		      int choice = input.nextInt();
+		      if (choice == 0)
+		         return;
+		      if (choice == 1) {
+		         System.out.println("댓글을 작성하고 싶은 게시물의 번호를 적어주세요");
+
+		         Bid = Integer.parseInt(input.next());
+
+		         System.out.print(Bid + "번 게시글에 남길 댓글을 작성해주세요(한줄만 허용 ): ");
+
+		         input.nextLine();
+
+		         comment = input.nextLine();
+		         System.out.print("'" + comment + "'" + "\n위 내용을 정말로 남기겠습니까? 1:네 0:아니요 ::");
+		         if (input.nextInt() == 0) {
+		            return;
+		         }
+
+		         makeComment(Bid, Cid, Tid, user, comment);
+		      }
+		      if (choice == 2) {
+		         System.out.println("댓글을 보고 싶은 게시물의 번호를 적어주세요");
+
+		         Bid = Integer.parseInt(input.next());
+		         System.out.println("");
+		         showComment(Bid, Cid, getTid());
+		      }
+
+		   }
+
+		   public void showComment(int Bid,int Cid, int Tid) {
+		      String sql = "select * from comments where bid=" + Bid + " and cid =" + Cid + " and Tid =" + Tid;
+		      
+		      ResultSet rs = db.runSql(sql);
+
+		      Date cDate;
+		      String content;
+		      String userId;
+		      try {
+		         while (rs.next()) {
+		            cDate = rs.getDate(2);
+		            content = rs.getString(3);
+		            userId = rs.getString(7);
+		            System.out.println(userId +" " +cDate.toString());
+		            System.out.println("> "+ content);
+		            System.out.println("--------------------------");
+
+		         }
+		         rs.close();
+		      } catch (SQLException e) {
+		         // TODO Auto-generated catch block
+		         e.printStackTrace();
+		      }
+
+		      
+		      
+		      
+		   }
 	
 	
 	  public  void modifyPost(Scanner input) {
