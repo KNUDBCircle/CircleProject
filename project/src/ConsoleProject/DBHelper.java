@@ -24,7 +24,7 @@ public class DBHelper {
 	         System.out.println("Success");
 	      } catch (ClassNotFoundException e1) {
 	         // TODO Auto-generated catch block
-	    	 System.out.println("�Ӱ�������");
+	    	 System.out.println("connected");
 	         e1.printStackTrace();
 	         System.exit(1);
 	      }

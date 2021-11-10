@@ -57,7 +57,13 @@ public class Project{
 //		circle.circlePage(conn, stmt, user);
 		String input;
 		if(um.userConfig(sc, user) == 1) return;
+	    enterCircle c1=new enterCircle("파도타기",user);
+	     
+	    c1.printMenu();
 		
+		
+		
+		System.out.println("나옴 !");
 	}
 
 }

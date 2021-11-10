@@ -100,8 +100,8 @@ public class Circle {
 	}
 
 	public int createCirclePage() {
-		// start-date end-date max_person,thumb_name, max_peopleÀº nullÃ³¸®
-		// µ¿¾Æ¸®Àå °ú phone numÀº userµ¥ÀÌÅÍ·Î ÀÚµ¿Ã³¸®
+		// start-date end-date max_person,thumb_name, max_peopleï¿½ï¿½ nullÃ³ï¿½ï¿½
+		// ï¿½ï¿½ï¿½Æ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ phone numï¿½ï¿½ userï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ ï¿½Úµï¿½Ã³ï¿½ï¿½
 
 		System.out.println("===========create Circle page==============");
 		System.out.print("Circle name: ");
@@ -114,7 +114,6 @@ public class Circle {
 		System.out.print("Category id?: ");
 		categoryId = sc.nextInt();
 		manager = user.getUserId();
-		phoneNum = user.getUserPhoneNum();
 		id = getNewCircleId();
 
 		String sql = getInsertCircleQuery();
@@ -129,7 +128,7 @@ public class Circle {
 			tempString = "TO_DATE('" + tempString + "', 'yyyy-mm-dd'), ";
 		else if (tempString.equals("NULL"))
 			tempString += ", ";
-		else if (tempString.matches(".*[a-zA-Z¤¡-¤¾¤¿-¤Ó°¡-ÆR].*") || tempString.length() > 8)
+		else if (tempString.matches(".*[a-zA-Zã„±-ã…Žã…-ã…£ê°€-R].*") || tempString.length() > 8)
 			tempString = "'" + tempString + "', ";
 		else
 			tempString += ", ";
