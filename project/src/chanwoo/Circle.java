@@ -109,10 +109,10 @@ public class Circle {
 	public int createCirclePage() {
 		// start-date end-date max_person,thumb_name, max_people�� nulló��
 		// ���Ƹ��� �� phone num�� user�����ͷ� �ڵ�ó��
-
+		sc.nextLine();
 		
 		System.out.print("Circle name: ");
-		cname = sc.next();
+		cname = sc.nextLine();
 		System.out.print("Description: ");
 		description = sc.nextLine();
 		System.out.print("Manager's phone Number ex)01012345678: ");
