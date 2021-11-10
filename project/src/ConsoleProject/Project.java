@@ -3,6 +3,7 @@ package ConsoleProject;
 import java.sql.*;
 import java.util.Scanner;
 import SpecificCircle.*;
+import chanwoo.Circle;
 
 public class Project{
 	static User user = null;
@@ -51,38 +52,24 @@ public class Project{
 	}
 	
 	public static void afterSignIn() {
-//		System.out.println("1.Create/submit");
-//		System.out.println("2.Enter circle");
-//		Circle circle = new Circle(conn, stmt, user);
-//		circle.circlePage(conn, stmt, user);
 		String input;
-		if(um.userConfig(sc, user) == 1) return;
-	    enterCircle c1=new enterCircle("파도타기",user);
-	     
-	    c1.printMenu();
 		
-		
-		
-		System.out.println("나옴 !");
+		while(true) {
+			System.out.println("Hello " + user.getUserName() + "!");
+			System.out.println("1. User Config\t2. Go to circle page\t3. Log out");
+			input = sc.nextLine();
+			if(input.equals("1")) {
+				if(um.userConfig(sc, user) == 1) return;
+			}
+			else if(input.equals("2")) {
+				Circle circle = new Circle(user);
+				circle.circlePage();
+			}
+			else if(input.equals("3")) {
+				System.out.println("Bye bye!");
+				return;
+			}
+		}
 	}
 
 }
-
-//public class Project {
-//	
-//	public static void main(String[] args) {
-//
-//
-//		User user1= new User("gsqogs074","하진","");
-//	    enterCircle c1=new enterCircle("파도타기",user1);
-//	     
-//	    c1.printMenu();
-//		
-//		
-//		
-//		System.out.println("나옴 !");
-//	    
-//
-//	}
-//
-//}

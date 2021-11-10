@@ -1,6 +1,8 @@
 package chanwoo;
 
 import ConsoleProject.*;
+import SpecificCircle.enterCircle;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -20,8 +22,8 @@ public class Circle {
 	Date endDate;
 	Scanner sc;
 
-	public Circle(DBHelper db, User user) {
-		this.db = db;
+	public Circle(User user) {
+		this.db = DBHelper.getInstance();
 		this.user = user;
 	}
 
@@ -48,7 +50,9 @@ public class Circle {
 				submitCirclePage();
 			}
 			if (choice == 4) {
-
+//				enterCircle c1=new enterCircle("파도타기",user);
+//			     
+//			    c1.printMenu();
 			}
 			System.out.println("1.Create Circle");
 			System.out.println("2.Search Circle");
