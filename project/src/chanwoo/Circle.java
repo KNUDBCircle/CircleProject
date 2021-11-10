@@ -108,7 +108,7 @@ public class Circle {
 		System.out.print("Circle name: ");
 		cname = sc.next();
 		System.out.print("Description: ");
-		description = sc.next();
+		description = sc.nextLine();
 		System.out.print("Manager's phone Number ex)01012345678: ");
 		phoneNum = sc.next();
 		System.out.print("is Circle? (Y/N): ");
