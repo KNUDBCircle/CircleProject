@@ -12,9 +12,7 @@ public class Project{
 	
 	public static void main(String[] args) {
 		
-<<<<<<< HEAD
 		DBHelper.getInstance();
-		
 		while(signphase()) {
 			;
 		}
@@ -55,6 +53,11 @@ public class Project{
 	public static void afterSignIn() {
 		String input;
 		
+		if(user.getUserId().equals("admin")) {
+			adminPhase();
+			return;
+		}
+		
 		while(true) {
 			System.out.println("Hello " + user.getUserName() + "!");
 			System.out.println("1. User Config\t2. Go to circle page\t3. Log out");
@@ -73,4 +76,10 @@ public class Project{
 		}
 	}
 
+	public static void adminPhase() {
+		SqlResponsePrinter printer = new SqlResponsePrinter();
+		while(printer.selectSql(sc)) {
+			;
+		}
+	}
 }

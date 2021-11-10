@@ -36,15 +36,13 @@ public class crud {
 	}
 
 
-	public void makePost(String title, String contents) {
+	public void makePost(String title, String contents, Scanner input) {
 		
 		
 		//int cid=getCid();
 		int tid=getTid();
 		int countB=0;
 		countB=getBoardcount(tid);     //getBoardCount는 해당 tab의 총 게시물 갯수를 return. 
-		
-		Scanner input=new Scanner(System.in);
 	
 
 		String sql="";
@@ -69,14 +67,13 @@ public class crud {
 	}
 	
 	
-	public void searchPost(){
+	public void searchPost(Scanner input){
 		
 		
 		//int Cid=getCid();
 		int Tid=getTid();
 		int Bid=0;
 		String comment="";
-		Scanner input=new Scanner(System.in);
 	
 		try {
 			
@@ -139,7 +136,7 @@ public class crud {
 	}
 	
 	
-	  public  void modifyPost() {
+	  public  void modifyPost(Scanner input) {
 		// TODO Auto-generated method stub
 		//chekAuthority(user2);
 	
@@ -147,7 +144,6 @@ public class crud {
 		//int Cid=getCid();
 		int Tid=getTid();
 		String sql="";
-		Scanner input=new Scanner(System.in);
 		
 		
 		System.out.println("---------------내가 작성한 게시글------------- ");

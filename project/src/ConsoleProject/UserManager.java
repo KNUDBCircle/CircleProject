@@ -130,7 +130,7 @@ public class UserManager {
 		return db.updateSql(sql);
 	}
 	
-	private int printDepartment() {
+	public static int printDepartment() {
 		DBHelper db = DBHelper.getInstance();
 		
 		ResultSet rs = db.runSql("SELECT * FROM DEPARTMENT");
