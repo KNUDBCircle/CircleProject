@@ -17,7 +17,7 @@ import ConsoleProject.User;
 public class enterCircle extends crud {
 	
 //	 static DBHelper db = DBHelper.getInstance();
-	Scanner input = null;
+
 	 
 	public static ArrayList<Tab> tab_info= new ArrayList<Tab>();//타입설정 Student객체만 사용가능
 //	 public Tab currentTab;
