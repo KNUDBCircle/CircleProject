@@ -11,6 +11,8 @@ public class Project{
 	static UserManager um = new UserManager();
 	
 	public static void main(String[] args) {
+		
+		//지금 schedule 브런치
 	
 		DBHelper.getInstance();
 		
