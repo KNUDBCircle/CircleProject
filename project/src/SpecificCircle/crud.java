@@ -45,8 +45,7 @@ public class crud {
 		int countB=0;
 		countB=getBoardcount(tid);     //getBoardCount는 해당 tab의 총 게시물 갯수를 return. 
 		
-		Scanner input=new Scanner(System.in);
-	
+		
 
 		String sql="";
 		
@@ -77,7 +76,7 @@ public class crud {
 		int Tid=getTid();
 		int Bid=0;
 		String comment="";
-		Scanner input=new Scanner(System.in);
+
 	
 		try {
 			
