@@ -47,11 +47,17 @@ public class Circle {
 				submitCirclePage();
 			}
 			if (choice == 4) {
-				this.showCircleList();
+				this.showMyCircleList();
 				System.out.println("input circe id:");
 				id = sc.nextInt();
-				enterCircle c1 = new enterCircle(id,user,sc);
-				c1.printMenu();
+				if(checkEnter(id)) {
+					enterCircle c1 = new enterCircle(id,user,sc);
+					c1.printMenu();
+				}
+				else {
+					System.out.println("you have not joined this circle");
+				}
+
 			}
 			System.out.println("1.Create Circle    2.Search Circle    3.Submit Circle    4.Enter Circle    -1.Go Back");
 			choice = sc.nextInt();
@@ -142,6 +148,26 @@ public class Circle {
 		
 	}
 	
+	
+	public boolean checkEnter(int cid) {
+		ResultSet rs = null;
+		String sql = "select user_id from belongs_to where cid = " + cid+ " and user_id = '" +user.getUserId() +"'";
+		rs = db.runSql(sql);
+		try {
+			if(rs.next()) {
+				rs.close();
+				return true;
+			}
+			else {
+				rs.close();
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;		
+	}
 	public String makeToken(String tempString) {
 		if (tempString.matches(".*-.*"))
 			tempString = "TO_DATE('" + tempString + "', 'yyyy-mm-dd'), ";
@@ -153,7 +179,24 @@ public class Circle {
 			tempString += ", ";
 		return tempString;
 	}
+	public void showMyCircleList() {
 
+		ResultSet rs = null;
+		String sql = "select distinct c.id, c.cname \r\n"
+				+ "from belongs_to b, circle c\r\n"
+				+ "where b.user_id = '"+  user.getUserId() +"' and b.cid = c.id";
+		rs = db.runSql(sql);
+		try {
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String cvalue = rs.getString(2);
+				System.out.println(String.valueOf(id) + "  " + cvalue);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void showCircleList() {
 
 		ResultSet rs = null;
