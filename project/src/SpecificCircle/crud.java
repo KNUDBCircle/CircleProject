@@ -37,7 +37,7 @@ public class crud {
 	}
 
 
-	public void makePost(String title, String contents, Scanner input) {
+	public void makePost(String title, String contents) {
 		
 		
 		//int cid=getCid();
@@ -169,7 +169,7 @@ public class crud {
 		   }
 	
 	
-	  public  void modifyPost(Scanner input) {
+	  public  void modifyPost() {
 		// TODO Auto-generated method stub
 		//chekAuthority(user2);
 	

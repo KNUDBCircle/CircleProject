@@ -136,7 +136,7 @@ public class enterCircle extends crud {
 			              
 			          }
 			      System.out.println("제목: "+title+"  내용: "+sb.toString());
-		          makePost(title, sb.toString(), input);
+		          makePost(title, sb.toString());
 			          
 
 			      }
@@ -148,12 +148,12 @@ public class enterCircle extends crud {
 			   break;
 			   
 		   case 2:  //게시물 조회하기 
-			  searchPost(input);
+			  searchPost();
 			  break;
 			   
 			       
 		   case 3:  //게시물 수정 및 삭제하기 
-			   modifyPost(input);
+			   modifyPost();
 			   break;
 			   
 			   
