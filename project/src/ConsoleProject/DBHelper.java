@@ -1,4 +1,4 @@
-package ConsoleProject;
+package ConsoleProject;///
 import java.sql.*;
 public class DBHelper {
 	   private static DBHelper instance = new DBHelper();
