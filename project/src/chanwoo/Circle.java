@@ -35,15 +35,17 @@ public class Circle {
 		int choice = sc.nextInt();
 		while (choice != -1) {
 
-			if (choice == 1)
+			if (choice == 1) {
+				System.out.println("===========create Circle page==============");
 				createCirclePage();
-
+			}
 			if (choice == 2) {
+				System.out.println("===========search Circle page==============");
 				searchCirclePage();
-
 			}
 			if (choice == 3) {
-
+				System.out.println("===========Submit Circle page==============");
+				submitCirclePage();
 			}
 			if (choice == 4) {
 
@@ -59,7 +61,7 @@ public class Circle {
 	}
 
 	public int searchCirclePage() {
-		System.out.println("===========search Circle page==============");
+		
 		showCircleList();
 		int choice;
 		System.out.println("Input the ID of the circle you want to know: ");
@@ -103,7 +105,7 @@ public class Circle {
 		// start-date end-date max_person,thumb_name, max_people�� nulló��
 		// ���Ƹ��� �� phone num�� user�����ͷ� �ڵ�ó��
 
-		System.out.println("===========create Circle page==============");
+		
 		System.out.print("Circle name: ");
 		cname = sc.next();
 		System.out.print("Description: ");
@@ -122,7 +124,23 @@ public class Circle {
 
 		return 3;
 	}
-
+	public int submitCirclePage() {
+		
+		showCircleList();
+		System.out.println("Input the ID of the circle you want to submit: ");
+		id = sc.nextInt();
+		submitCircle(id);
+		System.out.println("submit complete ");
+		
+		return 3;
+	}
+	public void submitCircle(int cid){
+		String sql = "INSERT INTO BELONGS_TO VALUES (" + String.valueOf(cid)+", ";
+		sql += "'"+user.getUserId()+"')";
+		int res = db.updateSql(sql);
+		
+	}
+	
 	public String makeToken(String tempString) {
 		if (tempString.matches(".*-.*"))
 			tempString = "TO_DATE('" + tempString + "', 'yyyy-mm-dd'), ";
