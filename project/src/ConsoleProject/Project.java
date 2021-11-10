@@ -16,8 +16,7 @@ public class Project {
 	     
 	    c1.printMenu();
 		
-		
-		
+	
 		System.out.println("나옴 !");
 	    
 
