@@ -161,7 +161,7 @@ public class enterCircle extends crud {
 			   break;
 	
 		   }
-		   if (num==5)
+		   if (num==4)
 			   break;
 		   
 	   }
