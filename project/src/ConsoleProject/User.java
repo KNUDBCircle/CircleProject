@@ -65,3 +65,6 @@ public class User {
 	
 	
 }
+
+
+//user는 phonenumber 추가한거빼고 똑같음,,
